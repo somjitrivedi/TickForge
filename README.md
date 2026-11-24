@@ -69,17 +69,3 @@ On startup, rooms and sessions left open by a crash are closed with the reason `
 ## Determinism rules
 
 Game state uses integers only: no floating-point positions and no `Math.random`, `Math.sin` or `Date.now` inside `step`. Randomness comes from the seeded `RngState` stored in the game state, so cloning the state also clones the RNG. Each tick produces a state hash, and tests check that replays give identical hashes.
-
-## Roadmap
-
-| # | Phase | Complexity | Status |
-|---|---|---|---|
-| 0 | Monorepo, sim contract, demo game, test harness | Low | Done |
-| 1 | Binary protocol, fixed-tick loop, rooms, WebSocket transport, SQLite store | Medium | Done |
-| 2 | Authoritative snapshots, delta compression, interpolation | Medium | |
-| 3 | Client prediction and reconciliation | High | |
-| 4 | Fixed-point maths and rollback, with a desync check | High | |
-| 5 | Lag compensation | High | |
-| 6 | Matchmaking and Glicko-2 ratings (SQLite) | Medium | |
-| 7 | Room scaling: coordinator, worker pools, reconnects, draining | High | |
-| 8 | WebRTC unreliable transport, network simulator, load testing | Medium–High | |
