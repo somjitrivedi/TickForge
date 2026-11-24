@@ -1,11 +1,18 @@
 # TickForge
 
-An authoritative real-time multiplayer game server engine in TypeScript: client prediction, rollback netcode, lag compensation, matchmaking and room scaling. The server and the clients run the same deterministic simulation code.
+An authoritative real-time multiplayer game server engine in TypeScript. The server and the clients run the same deterministic simulation code.
+
+**Status: early development.** Working today: the authoritative server with a fixed-step tick loop, the binary wire protocol, rooms with capacity limits, a WebSocket transport, SQLite persistence, and a client SDK that sends inputs and receives snapshots. Not built yet: client prediction, rollback netcode, lag compensation, matchmaking and multi-process room scaling.
 
 ## Requirements
 
 - Node.js 22.18 or newer (TypeScript runs natively through type stripping; there is no build step)
 - No native dependencies: SQLite is Node's built-in `node:sqlite`, WebSockets use the pure-JS `ws` package
+- Run it from a clone of this repository. The packages are not published to npm, and they point at TypeScript source, which Node will not run from inside `node_modules`. A browser game needs a bundler to use `@tickforge/client`.
+
+## Production notes
+
+The server speaks plain `ws://`. Put it behind a TLS-terminating proxy and have clients connect with `wss://`, because the Welcome message carries the player's reconnect token.
 
 ## Quick start
 
